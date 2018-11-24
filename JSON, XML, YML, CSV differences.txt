@@ -1,0 +1,52 @@
+Formats for transferring data structures from one system to another. 
+Using the universal string metrhod:
+
+----------------------------------------------------------------------------------------------------------------------
+
+1. XML  - The indentation doesn't matter. It is only for better visualisation
+
+<person>
+	<fname>petar</fname>
+	<lname>petrov</lname>
+	<age>32</age>
+	<adress>
+		<city>Sofia</city>
+		<street>Ul Mola 11</street>
+	</adress>
+</person>
+
+----------------------------------------------------------------------------------------------------------------------
+
+2. JSON - Most used the indentation doesn't matter.
+
+{ 
+	"fname": "petar",
+	"lname": "petrov",
+	"age": 32,
+	"adress":{
+		"city": "Sofia",
+		"street": "Ul Mola 11",
+	}
+}
+
+----------------------------------------------------------------------------------------------------------------------
+
+3. YML - Use the indentation to describe the heirarchy.
+
+person:
+	fname: "peter"
+	lname: "petrov"
+	age: 32
+	address:
+		city: "Sofia"
+		street: "Ul Mola 11"
+		
+----------------------------------------------------------------------------------------------------------------------
+
+4. CVN	Can't describe heirarchy. Most using for inporting in Excell table, or export from Excell tables.
+        Not for advanced structures
+
+fname, lname, age, city, street
+peter, petrov, 32, Sofia, Ul Mola 11
+
+----------------------------------------------------------------------------------------------------------------------

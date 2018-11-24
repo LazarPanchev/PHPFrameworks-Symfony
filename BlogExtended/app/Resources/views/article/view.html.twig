@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>Title: {{ article.title }}</h2>
+                    </header>
+
+                    <p>
+                        Content: {{ article.content }}
+                    </p>
+
+                    <p>
+                        Viewed: {{ article.viewCount }} times
+                    </p>
+
+                    <small class="author">
+                        Author: {{ article.author.fullName }}
+                    </small>
+
+                    <img src="{{ article.imageUrl }}" width="900" height="500" class="img-rounded" >
+
+                    <footer>
+                        <div class="pull-right">
+                            {% if app.getUser() and  app.getUser().isAdmin() %}
+                                <a class="btn btn-success btn-xs" href="{{ path('article_edit', {'id':article.id}) }}">Edit &raquo;</a>
+                                <a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':article.id}) }}">Delete &raquo;</a>
+                            {% endif %}
+                            <a class="btn btn-default btn-xs" href="{{ path('blog_index') }}">back &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
