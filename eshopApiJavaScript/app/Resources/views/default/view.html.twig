@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Products</h2>
+    <button><a href="{{ path('products_create') }}">Create New Product</a></button>
+    <hr />
+    <table border="2">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.catName }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

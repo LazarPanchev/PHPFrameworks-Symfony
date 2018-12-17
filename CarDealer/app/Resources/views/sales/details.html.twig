@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {#<div class="page-header" style="background: #aacd4e"><h2 class="text-center">CUSTOMERS</h2></div>#}
+    <div class="jumbotron" style="background-color: orangered"><h3 class="text-center">Sale Details</h3></div>
+    <div class="container table-responsive">
+        <h2>Sale Details</h2>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th class="success">Car Make</th>
+                <th class="warning">Car Model</th>
+                <th class="danger">Car Travelled Distance</th>
+                <th class="success">Customer name</th>
+                <th class="warning">Price sale with discount</th>
+                <th class="danger">Price sale without discount</th>
+                <th class="danger">Discount Percent</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {# @var sale \AppBundle\Entity\Sale #}
+                <td class="success">{{ sale.car.make }}</td>
+                <td class="warning">{{ sale.car.model }}</td>
+                <td class="danger">{{ sale.car.travelledDistance }}</td>
+                <td class="success">{{ sale.customer.name }}</td>
+                <td style="background-color: indianred">
+                    {# @var part \AppBundle\Entity\Part #}
+                    {{ sale.priceDiscount|number_format(2) }}
+                </td>
+                <td class="danger">
+                        {# @var part \AppBundle\Entity\Part #}
+                        {{ sale.car.getTotalSum|number_format(2) }}
+                </td>
+                <td  class="danger">
+                        {{ sale.discount }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        // $(document).ready(function () {
+        //     $("table").footable();
+        // })
+    </script>
+{% endblock %}

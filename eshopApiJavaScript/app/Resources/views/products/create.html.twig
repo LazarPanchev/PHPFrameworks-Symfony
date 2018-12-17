@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Create New Product</h2>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="form-group">
+        <span class="badge" style="color: blue">{{ form_label(form.name) }}</span>
+        {{ form_widget(form.name) }}
+        <span style="color: red">{{ form_errors(form.name) }}</span>
+    </div>
+    <div class="form-group">
+        <span class="badge" style="color: blue">{{ form_label(form.price) }}</span>
+        {{ form_widget(form.price) }}
+
+        <div style="color: red">{{ form_errors(form.price) }}</div>
+    </div>
+    <div class="form-group">
+        <span class="badge" style="color: blue">{{ form_label(form.description) }}</span>
+        {{ form_widget(form.description) }}
+        <span style="color: red">{{ form_errors(form.description) }}</span>
+    </div>
+    <div class="form-group">
+        <span class="badge" style="color: blue">{{ form_label(form.category) }}</span>
+        {{ form_widget(form.category) }}
+        <span style="color: red">{{ form_errors(form.category) }}</span>
+    </div>
+    <div class="form-group">
+        <span class="badge" style="color: blue">{{ form_label(form.tags) }}</span>
+        {{ form_widget(form.tags) }}
+        <span style="color: red">{{ form_errors(form.tags) }}</span>
+    </div>
+    <div class="form-group">
+        <span class="badge" style="color: blue">{{ form_label(form.country) }}</span>
+        {{ form_widget(form.country) }}
+        <span style="color: red">{{ form_errors(form.country) }}</span>
+    </div>
+
+    {{ form_end(form) }}
+    <script>
+        console.log("Hello");
+        $(document).ready(function () {
+            $("#country" ).autocomplete({
+                source: '/api/countries',
+                select: function (event,ui) {
+                    $('#country').val(ui.item.country_name);
+                    return false
+                }
+            }).data('uiAutocomplete')
+                ._renderItem = function( ul, item ) {
+                return $( "<li></li>" ).data("item.autocomplete", item)
+                    .append( item.country_name)
+                    .appendTo( ul );
+            };
+
+
+        });
+    </script>
+
+{% endblock %}

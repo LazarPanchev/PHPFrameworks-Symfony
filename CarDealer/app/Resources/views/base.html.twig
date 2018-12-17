@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Cars Dealer</title>
+        {% block stylesheets %}
+            {#Bootstrap CSS#}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" >
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" >
+            <link rel="stylesheet" href="{{ asset('css/footable.bootstrap.min.css') }}" >
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="jumbotron" style="background-color: bisque">
+            <div><h2 class="text-center">CAR DEALER</h2></div>
+            <button class="btn-xs"><a href="{{ path('homepage') }}">HOME</a></button>
+            <button class="btn-xs"><a href="{{ path('about') }}">ABOUT</a></button>
+        </div>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {#jQuery and Bootstrap JS#}
+            <script type="text/javascript" src="{{ asset('js/jQuery v3.3.1.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/footable.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

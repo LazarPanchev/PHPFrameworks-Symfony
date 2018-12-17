@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for camera in cameras %}
+        Make:<span>{{ camera.make }}</span>
+        Model:<span>{{ camera.model }}</span>
+        Price:<span>{{ camera.price }}</span>
+        Quantity:<span>{{ camera.quantity }}</span>
+        Min Shutter Speed:<span>{{ camera.minShutterSpeed }}</span>
+        Max Shutter Speed:<span>{{ camera.maxShutterSpeed }}</span>
+        Min Iso:<span>{{ camera.minIso }}</span>
+        Max Iso:<span>{{ camera.maxIso }}</span>
+        Is Full Frame:<span>{{ camera.isFullFrame }}</span>
+        Video Resolution:<span>{{ camera.videoResolution }}</span>
+        Light metering:<span>{{ camera.lightMetering }}</span>
+        Description:<span>{{ camera.description }}</span>
+        Image URL:<span>{{ camera.imageUrl }}</span>
+        <hr />
+    {% endfor %}
+{% endblock %}

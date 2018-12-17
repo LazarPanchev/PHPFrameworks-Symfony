@@ -1,0 +1,89 @@
+<?php
+
+namespace SoftUniBlogBundle\Controller;
+
+use SoftUniBlogBundle\Entity\Message;
+use SoftUniBlogBundle\Entity\Role;
+use SoftUniBlogBundle\Entity\User;
+use SoftUniBlogBundle\Form\UserType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+
+class UserController extends Controller
+{
+    /**
+     * @Route("/register", name="user_register")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registerAction(Request $request)
+    {
+        $user = new User();
+        $form = $this
+            ->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            //$email=$user->getEmail();
+            $email = $form->getData()->getEmail();
+
+            $requiredUser = $this
+                ->getDoctrine()
+                ->getRepository(User::class)
+                ->findOneBy(['email' => $email]);
+
+            if (!is_null($requiredUser)) {
+                $this->addFlash("message", "Username with email: $email already taken!");
+                return $this->render("user/register.html.twig",
+                    array('form' => $form->createView()));
+            }
+
+            if ($form->isValid()) {
+                $password = $this
+                    ->get('security.password_encoder')
+                    ->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+
+                $role = $this
+                    ->getDoctrine()
+                    ->getRepository(Role::class);
+                $userRole = $role->findOneBy(['name' => 'ROLE_USER']);
+                $user->addRole($userRole);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute("security_login");
+            } else {
+                $this->addFlash("message", "The password fields must match!");
+            }
+        }
+
+        return $this->render('user/register.html.twig',
+            array('form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/profile", name="user_profile")
+     */
+    public function profileAction()
+    {
+        $currentUser = $this->getUser();
+        if ($currentUser === null) {
+            return $this->redirectToRoute('blog_index');
+        }
+//        $messagesCount = count($currentUser->getRecipientMessages());
+        $messages=$this
+            ->getDoctrine()
+            ->getRepository(Message::class)
+            ->findByRecipient($currentUser->getId());
+
+        return $this->render("user/profile.html.twig",
+            ['user' => $currentUser,
+                'messagesCount' => count($messages)]);
+    }
+}

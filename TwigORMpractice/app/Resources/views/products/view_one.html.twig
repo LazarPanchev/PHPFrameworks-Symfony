@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="label">Your Product</h1>
+        <div class="container panel-body table">
+            <div class="container panel-primary col-sm-offset-1">
+                <label class="glyphicon">Product name: </label>
+                <span class="text-uppercase text-danger">{{ product.name }}</span>
+            </div>
+            <div class="container panel-primary col-sm-offset-1">
+                <label class="glyphicon">Product color:</label>
+                <span class="">{{ product.color }}</span>
+            </div>
+            <div class="container panel-primary col-sm-offset-1">
+                <label class="glyphicon">Product price:</label>
+                {{ product.price }}
+            </div>
+            <div class="container panel-primary col-sm-offset-1">
+                <label class="glyphicon">Product description:</label>
+                {{ product.description }}
+            </div>
+            <div class="container panel-primary col-sm-offset-1">
+                <label class="glyphicon">Product was added on:</label>
+                {{ product.createDate|date('d-m-y H:i:s') }}
+            </div>
+        </div>
+{% endblock %}

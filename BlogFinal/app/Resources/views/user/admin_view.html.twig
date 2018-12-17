@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container" style="background-color: #5eb5e0">
+            <div class="text-danger">Username:</div>
+            <div>
+                {{ user.username }}
+            </div>
+            <div class="text-danger"> FullName:</div>
+            <div>
+                {{ user.fullName }}
+            </div>
+            <div class="text-danger">User Articles:</div>
+            <div>
+              {{ user.articles|join('')|nl2br }}
+            </div>
+
+            <div class="text-danger">User Roles:</div>
+            <div>
+                {{ user.roles|join(', ') }}
+            </div>
+            <hr />
+    </div>
+
+{% endblock %}
+

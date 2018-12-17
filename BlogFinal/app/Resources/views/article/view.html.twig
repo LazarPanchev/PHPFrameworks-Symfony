@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for msg in app.session.flashBag.get('message') %}
+        <div id="msg" class="alert alert-success text-center">
+            {#<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>#}
+            {{ msg }}
+        </div>
+    {% endfor %}
+    {% for msg in app.session.flashBag.get('error') %}
+        <div id="msg" class="alert alert-danger text-center">
+            {#<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>#}
+            {{ msg }}
+        </div>
+    {% endfor %}
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>Title: {{ article.title }}</h2>
+                    </header>
+
+                    <p>
+                        Content: {{ article.content }}
+                    </p>
+
+                    <p>
+                        Viewed: {{ article.viewCount }} times
+                    </p>
+
+                    <small class="author">
+                        Author: {{ article.author.fullName }}
+                    </small>
+                    <div><img src="{{ asset('uploads/images/' ~ article.image) }}" width="400" height="200"
+                              class="img-rounded">
+                    </div>
+                    <div id="likes">
+                        <a href="{{ path('article_likes', {'id': article.id}) }}">
+                            {#<i class="glyphicon glyphicon-thumbs-up"></i>#}
+                            <a href="#"><i class="glyphicon glyphicon-plus" style="font-size:36px;"></i>Like!</a>
+                        </a>
+                    </div>
+
+                    <div class="container col-md-6">
+                    <button class="btn btn-sm btn-success" id="btnComment">Add Comment</button>
+                    <div id="comments">
+                    </div>
+                        <div class="text-left col-md-offset-6" >
+                            {% for comment in comments %}
+                                <small class="info"> {{ comment.dateAdded|date('F jS \\a\\t g:ia', 'Europe/Sofia') }}</small>
+                                <div class="text-danger">
+                                    <a href="{{ path('user_message', {'id': comment.author.id, 'articleId': article.id}) }}" >{{ comment.author.fullName }}</a>
+                                    says:</div>
+                                <div class="text-success table-bordered"
+                                     style="background-color: #C9C9C9"> {{ comment.content }}</div>
+
+                            <hr/>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <footer>
+                        <div class="pull-right">
+                            {% if app.getUser() and  app.getUser().isAdmin() %}
+                                <a class="btn btn-success btn-xs" href="{{ path('article_edit', {'id':article.id}) }}">Edit
+                                    &raquo;</a>
+                                <a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':article.id}) }}">Delete
+                                    &raquo;</a>
+                            {% endif %}
+                            <a class="btn btn-default btn-xs" href="{{ path('blog_index') }}">back &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    </div>
+{#{% if app.getUser() %}#}
+    <script>
+        let form = $(`
+        <form method="post" action="{{ path('add_comment', {'id': article.id}) }}">
+            <div class="form-group">
+                 <div class="col-sm-6">
+                    <textarea class="form-control" rows="6"
+                    id="comment_content" name="comment[content]"></textarea>
+                     <input class="btn btn-sm btn-success" type="submit" value="Add" />
+                 </div>
+            </div>
+        </form>`);
+
+        $('#btnComment').on('click', function (event) {
+            event.preventDefault();
+            let commentConteiner = $('#comments');
+            commentConteiner.append(form);
+            commentConteiner.toggle();
+        });
+    </script>
+    {#{% else %}#}
+    {#<script>#}
+        {#$('#btnComment').on('click', function (event) {#}
+            {#event.preventDefault();#}
+            {#alert("You have to loggin first to add a comment!")#}
+        {#})#}
+     {#</script>#}
+{#{% endif %}#}
+
+{% endblock %}

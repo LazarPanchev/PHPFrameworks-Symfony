@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container" style="background-color: blueviolet">
+        {% for msg in pagination %}
+            <div>
+                <span style="color: yellow">{{ loop.index }}.</span>
+                <a href="{{ path('user_mailbox_one',{'id': msg.id }) }}">
+                    <i class="glyphicon glyphicon-envelope" style="font-size:36px;"></i>
+                    Read
+                </a>
+                {# @var msg \SoftUniBlogBundle\Entity\Message #}
+                <span style="color: red">From:</span> {{ msg.sender.fullName }}
+                <span style="color: red">About:</span> {{ msg.about }}
+            </div>
+            <div>
+                {% if msg.read %}
+                    <span style="float: right; color: lightgreen">Read</span>
+                {% else %}
+                    <span style="float: right; color: red">Unread</span>
+                {% endif %}
+            </div>
+            <hr>
+        {% else %}
+            <h2>Not messages yet!</h2>
+        {% endfor %}
+    </div>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+{% endblock %}
+

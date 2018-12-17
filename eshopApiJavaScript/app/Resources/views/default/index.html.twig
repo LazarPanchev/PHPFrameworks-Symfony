@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Products</h2>
+    <button><a href="{{ path('products_create') }}">Create New Product</a></button>
+    <hr />
+    <table class="table table-striped" border="2" style="background-color: greenyellow">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Country</th>
+            <th>Category</th>
+            <th>Tags</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for product in products %}
+            <tr>
+                {# @var product \AppBundle\Entity\Product #}
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.country }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>
+                {% for tag in product.tags %}
+                    {{ tag|nl2br }}
+                {#<td>{{ product.tags|join(', ') }}</td>#}
+                {% endfor %}
+                </td>
+                <td><a href="{{ path('products_edit', {'id': product.id}) }}">Edit</a></td>
+                <td><a href="{{ path('products_delete', {'id' : product.id}) }}">Delete</a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

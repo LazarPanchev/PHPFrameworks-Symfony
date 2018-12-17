@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(form,{'attr':{'novalidate':'validate'}}) }}
+    <div style="color: blueviolet">{{ form_label(form.make) }}
+        {{ form_widget(form.make) }}
+        <div style="color: red">{{ form_errors(form.make) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.model) }}
+        {{ form_widget(form.model) }}
+        <div style="color: red">{{ form_errors(form.model) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.price) }}
+        {{ form_widget(form.price) }}
+        <div style="color: red">{{ form_errors(form.price) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.quantity) }}
+        {{ form_widget(form.quantity) }}
+        <div style="color: red">{{ form_errors(form.quantity) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.minShutterSpeed) }}
+        {{ form_widget(form.minShutterSpeed) }}
+        <div style="color: red">{{ form_errors(form.minShutterSpeed) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.maxShutterSpeed) }}
+        {{ form_widget(form.maxShutterSpeed) }}
+        <div style="color: red">{{ form_errors(form.maxShutterSpeed) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.minIso) }}
+        {{ form_widget(form.minIso) }}
+        <div style="color: red">{{ form_errors(form.minIso) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.maxIso) }}
+        {{ form_widget(form.maxIso) }}
+        <div style="color: red">{{ form_errors(form.maxIso) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.isFullFrame) }}
+        {{ form_widget(form.isFullFrame) }}
+        <div style="color: red">{{ form_errors(form.isFullFrame) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.videoResolution) }}
+        {{ form_widget(form.videoResolution) }}
+        <div style="color: red">{{ form_errors(form.videoResolution) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.lightMetering) }}
+        {{ form_widget(form.lightMetering) }}
+        <div style="color: red">{{ form_errors(form.lightMetering) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        <div style="color: red">{{ form_errors(form.description) }}</div>
+    </div>
+
+    <div style="color: blueviolet">{{ form_label(form.imageUrl) }}
+        {{ form_widget(form.imageUrl) }}
+        <div style="color: red">{{ form_errors(form.imageUrl) }}</div>
+    </div>
+    {{ form_end(form) }}
+    {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+
+    <script>
+        // let errorBox= $('#error');
+        // let li = $('<li>Hello</li>');
+        // errorBox.append(li);
+    </script>
+{% endblock %}

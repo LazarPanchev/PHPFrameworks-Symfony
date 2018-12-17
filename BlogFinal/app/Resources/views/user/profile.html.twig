@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <h1>Hello,  {{ user.fullName}}</h1>
+    <a href="{{ path('user_mailbox') }}">
+        <i class="glyphicon glyphicon-envelope" style="font-size:36px;"></i>
+        MailBox ({{ messagesCount }})
+    </a>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="container" style="background-color: lightblue">
+        <div class="row">
+            <div class="col-xs-4">
+                <h2 style="color: blue">Add Car</h2>
+                <hr>
+                <div class="form-group">
+                    <div>{{ form_row(form.make) }}</div>
+                </div>
+                <div class="form-group">
+                    <div>{{ form_row(form.model) }}</div>
+                </div>
+                <div class="form-group">
+                    <div>{{ form_row(form.travelledDistance) }}</div>
+                </div>
+                <div class="form-group">
+                    <div>{{ form_row(form.parts) }}</div>
+                </div>
+                <div class="form-group">
+                    <div>{{ form_row(form.save) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <div class="btn-lg">
+        <button class="btn-sm"><a href="{{ path('cars_all',{'make':'BMW'}) }}">Back to the list</a></button>
+    </div>
+{% endblock %}

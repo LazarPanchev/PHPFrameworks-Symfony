@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container" style="background-color: #5eb5e0">
+    {% for user in users %}
+        <a href="{{ path('admin_view', {'id': user.id }) }}"><div class="text-danger">
+            <span style="color: white">
+                {{ loop.index }}.
+            </span> Username:</div>
+        <div style="color:yellow">
+            {{ user.username }}
+        </div>
+        </a>
+
+        <hr />
+    {% endfor %}
+        </div>
+
+{% endblock %}
+

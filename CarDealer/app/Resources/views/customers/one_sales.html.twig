@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {#<div class="page-header" style="background: #aacd4e"><h2 class="text-center">CUSTOMERS</h2></div>#}
+    <div class="jumbotron" style="background-color: #b2dba1"><h3 class="text-center">Customer Sales</h3></div>
+    <div class="container table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th class="success">Customer Name</th>
+                <th class="warning">Bought Cars Count</th>
+                <th class="danger">Total Spend Money</th>
+                <th class="info">Edit Customer</th>
+                <th class="danger">Delete Customer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <tr>
+                {# @var customer \AppBundle\Entity\Customer #}
+                <td class="success">{{ customer.name}}</td>
+                <td class="warning">{{ customer.boughtCars}}</td>
+                <td class="danger">{{ customer.totalSpendMoney}}</td>
+                <td class="info"><a href="{{ path('customers_edit', {'id': customer.id}) }}" style="color: orangered">Edit</a></td>
+                <td class="danger"><a href="{{ path('customers_delete', {'id': customer.id}) }}" style="color: red">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        // $(document).ready(function () {
+        //     $("table").footable();
+        // })
+    </script>
+{% endblock %}

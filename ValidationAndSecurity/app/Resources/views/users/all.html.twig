@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for user in users %}
+        Username:<span>{{ user.username }}</span>
+        Email:<span>{{ user.email }}</span>
+        Phone:<span>{{ user.phone }}</span>
+        <hr />
+        {% endfor %}
+{% endblock %}

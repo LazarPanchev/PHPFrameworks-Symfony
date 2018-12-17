@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for msg in app.session.flashBag.get('message') %}
+        <div id="msg" class="alert alert-success text-center">
+            {#<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>#}
+            {{ msg }}
+        </div>
+    {% endfor %}
+    <div class="container" style="background-color: blueviolet">
+        <div>
+            {# @var msg \SoftUniBlogBundle\Entity\Message #}
+            <span style="color: red">From:</span> {{ msg.sender.fullName }}
+        </div>
+        <div>
+            <span style="color: red">About:</span> {{ msg.about }}
+        </div>
+        <div>
+            <span style="color: red">Content:</span> {{ msg.content }}
+
+        </div>
+        <div>
+            <span style="color: red">Date send:</span> {{ msg.dateAdded|date("F jS \\a\\t g:ia","Europe/Sofia") }}
+        </div>
+
+        <button id="btnMessage">Add Message</button>
+        <div id="container"></div>
+    </div>
+    <script>
+        let form = $(`
+        <form method="post">
+            About: <input type="text" name="message[about]"><br/>
+            Content: <textarea rows="10" name="message[content]"></textarea><br/>
+            {{ form_row(form._token) }}
+            <input type="submit" value="Send"/><br/>
+        </form>`);
+
+        $('#btnMessage').on('click', function (event) {
+            event.preventDefault();
+            let commentConteiner = $('#container');
+            commentConteiner.append(form);
+            commentConteiner.toggle();
+        })
+    </script>
+    <a href="{{ path('user_mailbox') }}"><button class="btn-info" >&#171;Back</button></a>
+
+{% endblock %}
+

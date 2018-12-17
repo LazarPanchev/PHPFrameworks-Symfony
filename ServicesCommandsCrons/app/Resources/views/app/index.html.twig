@@ -1,0 +1,8 @@
+{% for countOne in count %}
+    {# @var countOne \AppBundle\Entity\User #}
+<h1>Your user Id id: {{ countOne.getId() }}</h1>
+<h1>Your user and count is: {{ countOne.username }}</h1>
+<h1>Your user and count is: {{ countOne.birthPlace }}</h1>
+<h1>Your user and count is: {{ countOne.resources }}</h1>
+    <hr>
+{% endfor %}
